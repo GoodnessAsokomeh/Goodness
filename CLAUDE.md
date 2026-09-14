@@ -1,0 +1,25 @@
+# Project memory
+
+## Workada — Text to Image Evaluation (Image A/B Pair Rating)
+
+The full handbook lives in `.claude/memories/workada-image-pair.md` and is imported below.
+Trigger phrases: **"Image Pair"** or **"Workada"**.
+
+Quick recall, the parts that are easiest to get wrong:
+
+- **Six categories, always in this order:** Overall Preference, Correctness, Instruction
+  Following, Visual Quality, Less AI Generated, Final Preference.
+- **Overall Preference is the gut call at the top; Final Preference is the tally at the
+  bottom**, and it always states **STRONGLY** or **SLIGHTLY** — never a bare "better",
+  never skipped, never a default tie.
+- **Every justification is ≤ 250 characters** (target ~200–250). Verify the counts
+  programmatically before publishing.
+- **Every justification names a strength AND a flaw in both A and B**, and points the same
+  direction as the rating chosen.
+- **Publish only the ratings and justifications.** No preamble, no findings write-up, no
+  measurement tables.
+- **The point-at-it test:** never publish pixel counts, coordinates, luminance values,
+  ratios, or percentages of frame. Write what the eye notices at normal size.
+- **Ceiling of 15 minutes per image task.** Keep ties to one or two at most.
+
+@.claude/memories/workada-image-pair.md
