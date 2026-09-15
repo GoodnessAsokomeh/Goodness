@@ -22,4 +22,15 @@ Quick recall, the parts that are easiest to get wrong:
   ratios, or percentages of frame. Write what the eye notices at normal size.
 - **Ceiling of 15 minutes per image task.** Keep ties to one or two at most.
 
+## Toolchain
+
+The inspection toolchain is python3, Pillow, curl, ffmpeg and tesseract. The web
+container is ephemeral, so Pillow, ffmpeg and tesseract need reinstalling each session:
+
+```
+bash scripts/setup-toolchain.sh
+```
+
+It is idempotent and prints an OK/MISS line per tool.
+
 @.claude/memories/workada-image-pair.md
