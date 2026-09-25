@@ -20,6 +20,26 @@ You compare two responses (A and B) exactly like T2V, with the same core dimensi
 
 ---
 
+## Part 0.5: Frame extraction, always at 0.1s (user instruction, 2026-09-25)
+
+**Every clip (A, B, and any video reference) is extracted at one frame per 0.1s, i.e. 10 fps, before any judgment.** Never screen from a handful of sampled frames. Faces drift, objects vanish and counts change between coarse samples, so an absence or drift claim is only valid once the 0.1s frames have been checked.
+
+```
+ffprobe -v error -show_entries format=duration:stream=width,height,r_frame_rate -of compact a.mp4
+mkdir -p frames/a frames/b
+ffmpeg -v error -i a.mp4 -vf fps=10 -q:v 2 frames/a/%04d.jpg
+ffmpeg -v error -i b.mp4 -vf fps=10 -q:v 2 frames/b/%04d.jpg
+```
+
+- Frame `NNNN.jpg` sits at **(NNNN − 1) × 0.1s**. Frame 0001 is 0.0s, 0051 is 5.0s, 0100 is 9.9s.
+- Keep frames in the scratchpad, never in the repo.
+- To review cheaply, tile them into contact sheets (one second per row) and zoom into native crops only where something looks off:
+  `ffmpeg -v error -i a.mp4 -vf "fps=10,scale=320:-1,tile=10x5" -q:v 3 frames/a_sheet_%02d.jpg`
+- Always open the first frame, the middle, and the **final second** at native size for Person ID and Content Preservation checks.
+- The published rationale still follows the point-at-it test: say "near the end" or "as she turns", never frame numbers or timestamps to the tenth.
+
+---
+
 ## Part 1: Overall Preference
 
 - Works exactly like T2V. It is a gut call, scored **first**, and it is not an average or a count of the other dimensions.
@@ -178,6 +198,7 @@ Used for Overall Preference and every dimension on T2V, I2V and R2V.
 
 ## Before You Submit (I2V / R2V additions)
 - Did I score Overall first, on gut, before the preservation dimensions?
+- Did I extract every clip at 0.1s (10 fps) before judging?
 - Did I check the face at the start, middle AND final seconds of each clip?
 - Did I keep clothing, hair color, background and sky out of Person ID and in Content Preservation?
 - Did I use N/A only when no person (or no non-identity content) exists at all?

@@ -30,6 +30,8 @@ question or task it carries by its rules. It is NOT Workada image pair.
 
 Quick recall, the parts that are easiest to get wrong:
 
+- **Extract every clip at 0.1s (10 fps) before judging:**
+  `ffmpeg -i a.mp4 -vf fps=10 -q:v 2 frames/a/%04d.jpg`. Frame N sits at (N − 1) × 0.1s.
 - **Same core dimensions as T2V, plus the reference checks:** Person ID Preservation,
   Content / Reference Preservation, and Human-Created (R2V forms only).
 - **Overall Preference is the gut call, scored first.** The preservation dimensions never
